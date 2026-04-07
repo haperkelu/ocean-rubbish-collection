@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+:root {
+  --background: 200 80% 8%;
+  --foreground: 180 100% 95%;
+  --border: 195 60% 25%;
+  --input: 195 60% 20%;
+  --ring: 180 80% 50%;
+  --card: 200 70% 12%;
+  --card-foreground: 180 100% 95%;
+  --primary: 175 85% 45%;
+  --primary-foreground: 200 80% 5%;
+  --secondary: 200 60% 20%;
+  --secondary-foreground: 180 100% 90%;
+  --muted: 200 50% 18%;
+  --muted-foreground: 195 40% 60%;
+  --accent: 45 90% 55%;
+  --accent-foreground: 200 80% 5%;
+  --destructive: 0 85% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --app-font-sans: 'system-ui', sans-serif;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply font-sans antialiased bg-background text-foreground; }
+}
+
+/* Game canvas pixel font feel */
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-8px) scale(1.05); opacity: 1; }
+}
+
+@keyframes flash-red {
+  0%, 100% { background-color: transparent; }
+  50% { background-color: rgba(239, 68, 68, 0.3); }
+}
+
+@keyframes collect-pop {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes swim {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.bubble-animate { animation: bubble-float 2s ease-in-out infinite; }
+.flash-damage { animation: flash-red 0.4s ease; }
+.swim-animate { animation: swim 1s ease-in-out infinite; }
+.wave-animate { animation: wave 8s linear infinite; }
+
+.game-bg {
+  background: linear-gradient(180deg, 
+    hsl(200, 80%, 15%) 0%, 
+    hsl(210, 85%, 20%) 30%, 
+    hsl(215, 90%, 18%) 60%, 
+    hsl(220, 90%, 12%) 100%
+  );
+}
+
+.hud-panel {
+  background: rgba(0, 20, 40, 0.85);
+  border: 1px solid rgba(0, 200, 200, 0.3);
+  backdrop-filter: blur(8px);
+}
